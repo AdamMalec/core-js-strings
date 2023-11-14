@@ -450,8 +450,14 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const valueArr = value.split(' ');
+  const firstName = valueArr[1];
+  let lastName = valueArr[2].split('');
+  lastName.length -= 1;
+  lastName = lastName.join('');
+
+  return `${firstName} ${lastName}`;
 }
 
 /**
