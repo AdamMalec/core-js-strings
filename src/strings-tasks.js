@@ -515,8 +515,27 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = Array.from({ length: 26 }, (x, i) => (i + 10).toString(36));
+  const strArr = str.split('');
+  const resultArr = [];
+
+  strArr.forEach((item) => {
+    const isUpper = item === item.toUpperCase();
+    const index = alphabet.indexOf(item.toLowerCase());
+
+    if (index <= 12 && index !== -1) {
+      if (isUpper) resultArr.push(alphabet[index + 13].toUpperCase());
+      else resultArr.push(alphabet[index + 13]);
+    } else if (index > 12 && index !== -1) {
+      if (isUpper) resultArr.push(alphabet[index - 13].toUpperCase());
+      else resultArr.push(alphabet[index - 13]);
+    } else {
+      resultArr.push(item);
+    }
+  });
+
+  return resultArr.join('');
 }
 
 /**
